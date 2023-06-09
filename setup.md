@@ -15,3 +15,5 @@ Without access, you'll always need to do:
 python -m pip install -r requirements.txt
 
 instead of the usual pip ... it's now python -m pip. No environment.
+
+mkdir %userprofile%\.dbt
