@@ -1,0 +1,1 @@
+SELECT * FROM {{ref("DP_JF_RACES_WITH_DATES")}}
