@@ -31,7 +31,10 @@ clean-targets: # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   hackathon:
-
+    cte:
+      +materialized: ephemeral
+    mart:
+      +materialized: table
 seeds:
   hackathon:
     schema: RAW # all seeds in this project will use the schema "mappings" by default
