@@ -3,8 +3,7 @@ select
     src.*,
     laps.interval_id as lap_id,
     laps.interval_description as lap_desc,
-    interval_type as lap_type,
-    LEFT(src.time, 5) as tmin
+    interval_type as lap_type
 from {{ ref(from_table) }} as src
 inner join
     {{ ref(join_table) }} as laps
