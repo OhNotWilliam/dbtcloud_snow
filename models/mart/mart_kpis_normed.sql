@@ -1,39 +1,22 @@
 select
-    lactate_in_mmoll_l
-    / (select max(lactate_in_mmoll_l) from saphackathon.dev.mart_kpis)
-    * 100 as lactate_in_mmoll_l_pct_of_max,
-    perceived_pain
-    / (select max(perceived_pain) from saphackathon.dev.mart_kpis)
-    * 100 as perceived_pain_pct_of_max,
-    glucose_level
-    / (select max(glucose_level) from saphackathon.dev.mart_kpis)
-    * 100 as glucose_level_pct_of_max,
-    core_body_temp_in_c
-    / (select max(core_body_temp_in_c) from saphackathon.dev.mart_kpis)
-    * 100 as core_body_temp_in_c_pct_of_max,
-    heartrate_in_bpm
-    / (select max(heartrate_in_bpm) from saphackathon.dev.mart_kpis)
-    * 100 as heartrate_in_bpm_pct_of_max,
-    power_in_watt
-    / (select max(power_in_watt) from saphackathon.dev.mart_kpis)
-    * 100 as power_in_watt_pct_of_max,
-    cadence_in_rpm
-    / (select max(cadence_in_rpm) from saphackathon.dev.mart_kpis)
-    * 100 as cadence_in_rpm_pct_of_max,
-    total_hemoglobin_concentration_in_gdl / (
-        select max(total_hemoglobin_concentration_in_gdl)
-        from saphackathon.dev.mart_kpis
-    )
-    * 100 as total_hemoglobin_concentration_in_gdl_pct_of_max,
+    (LACTATE_IN_MMOLL_L - min_lactate) / (max_lactate - min_lactate) * 100 AS normalized_lactate,
+    (PERCEIVED_PAIN - min_pain) / (max_pain - min_pain) * 100 AS normalized_pain,
+    (GLUCOSE_LEVEL - min_glucose) / (max_glucose - min_glucose) * 100 AS normalized_glucose,
+    (CORE_BODY_TEMP_IN_C - min_temp) / (max_temp - min_temp) * 100 AS normalized_temp,
+    (HEARTRATE_IN_BPM - min_heartrate) / (max_heartrate - min_heartrate) * 100 AS normalized_heartrate,
+    (POWER_IN_WATT - min_power) / (max_power - min_power) * 100 AS normalized_power,
+    (CADENCE_IN_RPM - min_cadence) / (max_cadence - min_cadence) * 100 AS normalized_cadence,
+    (TOTAL_HEMOGLOBIN_CONCENTRATION_IN_GDL - min_hemoglobin) / (max_hemoglobin - min_hemoglobin) * 100 AS normalized_hemoglobin,
     pct_of_max_hr,
     saturated_hemoglobin_in_perc,
     workout_time_in_min,
     workout,
     date,
-    time,
+    time_min,
     tstamp,
     lap_id,
     lap_desc,
     lap_type,
     interval_start_time
-from {{ ref("mart_kpis") }}
+from {{ ref("mart_min_avgs") }}
+cross join {{ ref('min_max_kpis') }}

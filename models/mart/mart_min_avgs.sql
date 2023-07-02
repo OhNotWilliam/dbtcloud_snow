@@ -1,5 +1,5 @@
 SELECT
-    AVG(lactate_in_mmoll_l) as lactate,
+    AVG(lactate_in_mmoll_l) as lactate_in_mmoll_l,
     AVG(perceived_pain) as perceived_pain,
     AVG(glucose_level) as glucose_level,
     AVG(core_body_temp_in_c) as core_body_temp_in_c,

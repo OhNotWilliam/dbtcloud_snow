@@ -1,7 +1,7 @@
 with
     correlation_data as (
         {% set measures = [
-            "lactate",
+            "lactate_in_mmoll_l",
             "perceived_pain",
             "glucose_level",
             "core_body_temp_in_c",
