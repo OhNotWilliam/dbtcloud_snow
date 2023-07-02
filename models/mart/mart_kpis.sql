@@ -4,7 +4,7 @@ select
     gluc.glucose_level,
     temp.core_body_temp_in_c,
     fit.heartrate_in_bpm,
-    fit.heartrate_in_bpm / 195 * 100 as pct_of_max_hr,
+    fit.heartrate_in_bpm / 179 * 100 as pct_of_max_hr,
     fit.power_in_watt,
     fit.cadence_in_rpm,
     fit.total_hemoglobin_concentration_in_gdl,
