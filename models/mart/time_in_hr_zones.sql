@@ -27,12 +27,12 @@ SELECT
   zone,
   workout,
   CASE
-    WHEN zone = 1 THEN 'Very light'
-    WHEN zone = 2 THEN 'Light'
-    WHEN zone = 3 THEN 'Moderate'
-    WHEN zone = 4 THEN 'Hard'
-    WHEN zone = 5 THEN 'Maximum'
-    ELSE 'Below Very Light'
+    WHEN zone = 1 THEN '50-60%'
+    WHEN zone = 2 THEN '61-70%'
+    WHEN zone = 3 THEN '71-80%'
+    WHEN zone = 4 THEN '81-90%'
+    WHEN zone = 5 THEN '91-100%'
+    ELSE '<50%'
   END AS zone_name,
   seconds_in_zone,
     TO_CHAR(
