@@ -1,7 +1,7 @@
 with
     correlation_data as (
         {% set measures = [
-            "lactate",
+            "lactate_in_mmoll_l",
             "perceived_pain",
             "glucose_level",
             "core_body_temp_in_c",
@@ -12,16 +12,18 @@ with
             "total_hemoglobin_concentration_in_gdl",
             "saturated_hemoglobin_in_perc",
         ] %}
+        {% set sort_index = 0 %}
         {% for i in range(measures | length) %}
             {% for j in range(i + 1, measures | length) %}
-                {{ calculate_correlation(measures[i], measures[j], "mart_min_avgs") }}
+                {% set sort_index = loop.index %}
+                {{ calculate_correlation(measures[i], measures[j], sort_index, "mart_min_avgs") }}
                 union all
             {% endfor %}
         {% endfor %}
         select *
         from
             (
-                {{ calculate_correlation(measures[-1], measures[-1], "mart_min_avgs") }}
+                {{ calculate_correlation(measures[-1], measures[-1], 999, "mart_min_avgs") }}
                 where 1 = 0
             )  -- Dummy query to ensure final UNION ALL
     )
