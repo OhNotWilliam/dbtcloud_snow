@@ -1,5 +1,3 @@
-SELECT *, '1' as Workout FROM {{ref("DP_JF_FIT_LAPS_WORKOUT1")}}
-UNION ALL
-SELECT *, '2' as Workout FROM {{ref("DP_JF_FIT_LAPS_WORKOUT2")}}
-UNION ALL
-SELECT *, '3' as Workout FROM {{ref("DP_JF_FIT_LAPS_WORKOUT3")}}
+{{union_fit_laps_files("DP_JF_FIT_LAPS_WORKOUT1", "DP_JF_FIT_LAPS_WORKOUT2", "DP_JF_FIT_LAPS_WORKOUT3")}}
+
+
